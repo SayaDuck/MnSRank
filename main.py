@@ -1,6 +1,4 @@
-# -*- coding: utf-8 -*-
 import csv
-
 
 tournies = []
 players = []
@@ -24,5 +22,4 @@ with open('data/MnS_2021_Tournaments.csv', 'r') as f:
             if name not in [x['name'] for x in players]:
                 players.append({'name': name})
                 
-
 print(players)
