@@ -8,14 +8,15 @@ points = { 1: {'1st': 15, '2nd': 13, '3rd': 10, '4th': 8, '5th': 7, '7th': 6, '9
 # populate tournaments dict
 with open('data/MnS_2021_Tournaments.csv', 'r') as f:
     reader = csv.reader(f)
+    next(f)
     for row in reader:
         fifthlist = [row[10], row[11]]
         seventhlist = [row[12], row[13]]
         ninthlist = [row[14], row[15]]
         tournies.append({'id': row[0], 'date': row[1], 'name': row[2], 'link': row[3], 'entrants': row[4], 'tier': row[5], '1st': [row[6]], '2nd': [row[7]], '3rd': [row[8]], '4th': [row[9]], '5th': fifthlist, '7th': seventhlist, '9th': ninthlist})
-        # todo: maybe set up a conditional to remove 0 point placers here based on tourney tier
-tournies.pop(0)
+
 print(tournies)
+
 
 # populate players dict 
 with open('data/MnS_2021_Tournaments.csv', 'r') as f:
@@ -24,7 +25,7 @@ with open('data/MnS_2021_Tournaments.csv', 'r') as f:
     for row in reader:
         for name in row[6:]:
             if name not in [x['name'] for x in players]:
-                players.append({'name': name, 'placements': []})
+                players.append({'name': name, 'placements': [], 'points': []})
 
 print(players)
 
@@ -35,14 +36,26 @@ print(players)
 #   points:
 # }
 
-# maybe list (topplacements) that gets updated every time an new placement is looped through?
+# sorting key for placements list of dicts
+def sortPlacements(e):
+    return e['points']
 
+# tourney placings for each player
 for tourney in tournies:
     for place in placements:
         for player in players:
             if player['name'] in tourney[place]:
-                tourneyid = tourney['id']
                 pointscalc = points[int(tourney['tier'])][place]
-                player['placements'].append({'id': tourneyid, 'place': place, 'points': pointscalc})
+                if pointscalc > 0:
+                    tourneyid = tourney['id']
+                    player['placements'].append({'id': tourneyid, 'place': place, 'points': pointscalc})
+                    player['placements'].sort(reverse=True, key=sortPlacements)
+                    # could make a list of lists of tourney id to points at the time for a future graph over time
+
+
+
+
+
+
 
 print(players)
