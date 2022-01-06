@@ -3,7 +3,16 @@ import csv
 tournies = []
 players = []
 placements = ['1st', '2nd', '3rd', '4th', '5th', '7th', '9th']
+
+# Tourney tiers:
+# 1 - Supermajor
+# 2 - Major
+# 3 - Stacked Weekly (or equivalent)
+# 4 - Small Weekly (or equivalent)
+# 5 - Beginner Tournament
 points = { 1: {'1st': 15, '2nd': 13, '3rd': 10, '4th': 8, '5th': 7, '7th': 6, '9th': 5}, 2: {'1st': 10, '2nd': 8, '3rd': 7, '4th': 6, '5th': 5, '7th': 3, '9th': 2}, 3: {'1st': 5, '2nd': 4, '3rd': 3, '4th': 2, '5th': 1, '7th': 0, '9th': 0}, 4: {'1st': 4, '2nd': 3, '3rd': 2, '4th': 1, '5th': 0, '7th': 0, '9th': 0}, 5: {'1st': 1, '2nd': 0, '3rd': 0, '4th': 0, '5th': 0, '7th': 0, '9th': 0} }
+
+
 
 # populate tournaments dict
 with open('data/MnS_2021_Tournaments.csv', 'r') as f:
@@ -24,15 +33,6 @@ with open('data/MnS_2021_Tournaments.csv', 'r') as f:
             if name not in [x['name'] for x in players]:
                 players.append({'name': name, 'placements': [], 'points': []})
 
-
-# placements format:
-# {
-#   id:
-#   place:
-#   points:
-# }
-
-
 # sorting key for placements list of dicts
 def sortPlacements(e):
     return e['points']
@@ -50,24 +50,33 @@ for tourney in tournies:
         for player in players:
             if player['name'] in tourney[place]:
                 pointscalc = points[int(tourney['tier'])][place]
+
+                # placement only counted if it's worth something
                 if pointscalc > 0:
                     tourneyid = tourney['id']
                     player['placements'].append({'id': tourneyid, 'place': place, 'points': pointscalc})
-                    player['placements'].sort(reverse=True, key=sortPlacements)
-                    # could make a list of lists of tourney id to points at the time for a future graph over time
+                    
+                    # sorts placements from most valuable to least
+                    player['placements'].sort(reverse=True, key=sortPlacements) 
+                    
+                    # list of placements, which is then flipped so worst is first
                     pointslist = [l['points'] for l in player['placements']]
                     pointslist.reverse()
+
+                    # worst placement initial
                     playerpoints = pointslist[0]
                     if len(pointslist) > 1:
                         for point in pointslist[1:]:
                             playerpoints *= .5 # exponential scaling
                             playerpoints += point
+                    
+                    # adds to point history (adds every time for a historical progression over tournaments)
                     player['points'].append([tourneyid,playerpoints])
 
+# sorts players from most points to least
 players.sort(reverse=True, key=sortPlayers)
 
-print(players)
-
+# prints players and then their points (if >0)
 for player in players:
     if player['points']:
         print(player['name'] + ' ')
