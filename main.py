@@ -79,6 +79,4 @@ players.sort(reverse=True, key=sortPlayers)
 # prints players and then their points (if >0)
 for player in players:
     if player['points']:
-        print(player['name'] + ' ')
-        print(str(player['points'][-1][-1]) + '\n')
-    
+        print(player['name'] + ' ' + str(player['points'][-1][-1]))
