@@ -76,7 +76,16 @@ for tourney in tournies:
 # sorts players from most points to least
 players.sort(reverse=True, key=sortPlayers)
 
+# so the top player gets 100
+scalefactor = 100/players[0]['points'][-1][-1]
+
+# loops through and scales so final result of #1 is 100
+for player in players:
+    for result in player['points']:
+        result[-1] *= scalefactor
+
 # prints players and then their points (if >0)
 for player in players:
     if player['points']:
-        print(player['name'] + ' ' + str(player['points'][-1][-1]))
+        print(player['name'] + ' ' + str(round(player['points'][-1][-1], 2)))
+
