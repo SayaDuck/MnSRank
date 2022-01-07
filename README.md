@@ -13,16 +13,16 @@ This data was then processed to generate a list of player dictionaries, which we
 | Player        | Score |
 |---------------|-------|
 | iLLy          | 100.0 |
-| nix           | 77.31 |
+| nix           | 72.03 |
 | Centispede    | 51.63 |
 | Jayfeather6   | 50.76 |
 | Xorn          | 49.01 |
 | A1NVERSE      | 47.47 |
 | Maven         | 46.59 |
 | frog          | 46.59 |
-| minkull       | 45.71 |
 | Quetzalcoatl  | 44.4  |
 | kerokero      | 42.77 |
+| minkull       | 42.2  |
 | Jahvaro       | 41.32 |
 | Kiroko        | 40.44 |
 | ZaleTheBale   | 38.68 |

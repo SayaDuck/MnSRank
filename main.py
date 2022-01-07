@@ -10,7 +10,7 @@ placements = ['1st', '2nd', '3rd', '4th', '5th', '7th', '9th']
 # 3 - Stacked Weekly (or equivalent)
 # 4 - Small Weekly (or equivalent)
 # 5 - Beginner Tournament
-points = { 1: {'1st': 15, '2nd': 13, '3rd': 10, '4th': 8, '5th': 7, '7th': 6, '9th': 5}, 2: {'1st': 10, '2nd': 8, '3rd': 7, '4th': 6, '5th': 5, '7th': 3, '9th': 2}, 3: {'1st': 5, '2nd': 4, '3rd': 3, '4th': 2, '5th': 1, '7th': 0, '9th': 0}, 4: {'1st': 4, '2nd': 3, '3rd': 2, '4th': 1, '5th': 0, '7th': 0, '9th': 0}, 5: {'1st': 1, '2nd': 0, '3rd': 0, '4th': 0, '5th': 0, '7th': 0, '9th': 0} }
+points = { 1: {'1st': 15, '2nd': 12, '3rd': 10, '4th': 8, '5th': 7, '7th': 6, '9th': 5}, 2: {'1st': 10, '2nd': 8, '3rd': 7, '4th': 6, '5th': 5, '7th': 3, '9th': 2}, 3: {'1st': 5, '2nd': 4, '3rd': 3, '4th': 2, '5th': 1, '7th': 0, '9th': 0}, 4: {'1st': 4, '2nd': 3, '3rd': 2, '4th': 1, '5th': 0, '7th': 0, '9th': 0}, 5: {'1st': 1, '2nd': 0, '3rd': 0, '4th': 0, '5th': 0, '7th': 0, '9th': 0} }
 
 
 
