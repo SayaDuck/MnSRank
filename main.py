@@ -89,3 +89,8 @@ for player in players:
     if player['points']:
         print(player['name'] + ' ' + str(round(player['points'][-1][-1], 2)))
 
+
+import page
+
+# uses the index jinja template to generate a page
+page.generate("MnSRank 2021", tournies, players)
