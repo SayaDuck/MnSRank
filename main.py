@@ -31,7 +31,8 @@ with open('data/MnS_2021_Tournaments.csv', 'r') as f:
     for row in reader:
         for name in row[6:]:
             if name not in [x['name'] for x in players]:
-                players.append({'name': name, 'placements': [], 'points': []})
+                if name: # check for empty
+                    players.append({'name': name, 'placements': [], 'points': []})
 
 # sorting key for placements list of dicts
 def sortPlacements(e):

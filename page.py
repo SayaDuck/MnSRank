@@ -1,9 +1,6 @@
 from jinja2 import Environment, FileSystemLoader
 import os
 
-
-
-
 def generate(title,tournamentdata,playerdata):
     root = os.path.dirname(os.path.abspath(__file__))
     templates_dir = os.path.join(root, 'templates')

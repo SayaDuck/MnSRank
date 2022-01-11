@@ -1,2 +1,24 @@
 <!DOCTYPE html>
-<h1>MnSRank 2021</h1>
+<html lang="en">
+<head>
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+    <h1>{{ title }}</h1>
+    <p id="playerlist">
+    {% for player in playerlist %}
+        {% if player['points'] %}
+            <button type="button" class="collapsible">{{ player['name'] }}</button>
+            <div class="content">
+                <p>hi</p>
+            </div>
+        {% endif %}
+    {% endfor %}
+    </p>
+
+    <script src="static/js/script.js"></script>
+</body>
+    
+</html>
+
