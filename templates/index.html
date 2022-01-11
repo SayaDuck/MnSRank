@@ -6,7 +6,8 @@
 </head>
 <body>
     <h1>{{ title }}</h1>
-    <p id="playerlist">
+    <div id="playerlist">
+        woah it's a list
     {% for player in playerlist %}
         {% if player['points'] %}
             <button type="button" class="collapsible">{{ player['name'] }}</button>
@@ -15,7 +16,7 @@
             </div>
         {% endif %}
     {% endfor %}
-    </p>
+    </div>
 
     <script src="static/js/script.js"></script>
 </body>
