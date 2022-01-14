@@ -1,7 +1,7 @@
 from jinja2 import Environment, FileSystemLoader
 import os
 
-def generate(title,tournamentdata,playerdata):
+def generate(title,tournamentdata,playerdata,playerinfo):
     root = os.path.dirname(os.path.abspath(__file__))
     templates_dir = os.path.join(root, 'templates')
     env = Environment( loader = FileSystemLoader(templates_dir) )
@@ -13,5 +13,6 @@ def generate(title,tournamentdata,playerdata):
         fh.write(template.render(
             title = title,
             tourneylist = tournamentdata,
-            playerlist = playerdata
+            playerlist = playerdata,
+            playerinfo = playerinfo
         ))
