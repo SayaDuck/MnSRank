@@ -14,7 +14,7 @@ points = { 1: {'1st': 15, '2nd': 12, '3rd': 10, '4th': 8, '5th': 7, '7th': 6, '9
 
 
 
-# populate tournaments dict
+# populate tournaments list
 with open('data/MnS_2021_Tournaments.csv', 'r') as f:
     reader = csv.reader(f)
     next(f)
@@ -24,7 +24,7 @@ with open('data/MnS_2021_Tournaments.csv', 'r') as f:
         ninthlist = [row[14], row[15]]
         tournies.append({'id': row[0], 'date': row[1], 'name': row[2], 'link': row[3], 'entrants': row[4], 'tier': row[5], '1st': [row[6]], '2nd': [row[7]], '3rd': [row[8]], '4th': [row[9]], '5th': fifthlist, '7th': seventhlist, '9th': ninthlist})
 
-# populate players dict 
+# populate players list
 with open('data/MnS_2021_Tournaments.csv', 'r') as f:
     reader = csv.reader(f)
     next(f)
@@ -91,7 +91,17 @@ for player in players:
         print(player['name'] + ' ' + str(round(player['points'][-1][-1], 2)))
 
 
-import page
+# player info dict
+playerinfo = {}
+
+# populate player info dict
+with open('data/MnS_2021_PlayerInfo.csv', 'r') as f:
+    reader = csv.reader(f)
+    next(f)
+    for row in reader:
+        playerinfo[row[0]] = {'name': row[0], 'main': row[1].split(), 'secondary': row[2].split(), 'input': row[3], 'country': row[4], 'twitter': row[5], 'youtube': row[6], 'twitch': row[7], 'firsttourney': row[8], 'pronouns': row[10], 'blurb': row[11]}
+
 
 # uses the index jinja template to generate a page
-page.generate("MnSRank 2021", tournies, players)
+import page
+page.generate("MnSRank 2021", tournies, players, playerinfo)
