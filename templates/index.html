@@ -7,12 +7,46 @@
 <body>
     <h1>{{ title }}</h1>
     <div id="playerlist">
-        woah it's a list
+        woah it's a list <br>
     {% for player in playerlist %}
-        {% if player['points'] %}
-            <button type="button" class="collapsible">{{ player['name'] }}</button>
+        {% if player.points %}
+            <button type="button" class="collapsible">{{ player.name }}</button>
             <div class="content">
-                <p>hi</p>
+                <div class="infographic">
+                    <div class="playerinfo">
+                        <div class="pronouns"></div>
+                        <div class="country"></div>
+                        <div class="inputdevice"></div>
+                        <div class="playerage"></div>
+                        <div class="socials"></div>
+                        <div class="characters">
+                            <div class="mains">
+                                <p>Mains: 
+                                {% for item in playerinfo[player.name].main %}
+                                    {{ item }}
+                                {% endfor %}
+                                </p>
+                            </div>
+                            {% if item in playerinfo[player.name].secondary %}
+                            <div class="secondaries">
+                                <p>Secondaries: 
+                                    {% for item in playerinfo[player.name].secondary %}
+                                        {{ item }}
+                                    {% endfor %}
+                                </p>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="results">
+                        {% for item in player.placements %}
+                            {% if loop.index <= 4 %}
+                                Tier {{ tourneylist[item.id].tier }}: {{ tourneylist[item.id].name }} - {{ item.place }} <br>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <p class="blurb">hi</p>
+                </div>
             </div>
         {% endif %}
     {% endfor %}
