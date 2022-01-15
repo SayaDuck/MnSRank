@@ -6,6 +6,8 @@ WIP page [here](https://sydk.dev/MnSRank/)
 ## Why?
 2021 just ended and this seemed like a cool idea. Elo doesn't work well for various reasons that all apply to MnS (small community, low volume of tourney games, double elimination). Making a ranking that was purely how well someone did in tournaments this year (**not** how "skilled" they are) was the goal.
 
+And honestly, given that I did it from scratch without any reference, it turned out really well data processing-wise.
+
 ## Methodology
 All Maiden & Spell tournament data of the year was compiled, along with the top 12 placers at each tournament. For a tournament to qualify, it must be a double-elimination tournament with the standard ruleset. 
 
