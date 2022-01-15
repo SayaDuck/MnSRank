@@ -1,6 +1,6 @@
 import csv
 
-tournies = []
+tournies = {}
 players = []
 placements = ['1st', '2nd', '3rd', '4th', '5th', '7th', '9th']
 
@@ -14,7 +14,7 @@ points = { 1: {'1st': 15, '2nd': 12, '3rd': 10, '4th': 8, '5th': 7, '7th': 6, '9
 
 
 
-# populate tournaments list
+# populate tournaments dict
 with open('data/MnS_2021_Tournaments.csv', 'r') as f:
     reader = csv.reader(f)
     next(f)
@@ -22,7 +22,7 @@ with open('data/MnS_2021_Tournaments.csv', 'r') as f:
         fifthlist = [row[10], row[11]]
         seventhlist = [row[12], row[13]]
         ninthlist = [row[14], row[15]]
-        tournies.append({'id': row[0], 'date': row[1], 'name': row[2], 'link': row[3], 'entrants': row[4], 'tier': row[5], '1st': [row[6]], '2nd': [row[7]], '3rd': [row[8]], '4th': [row[9]], '5th': fifthlist, '7th': seventhlist, '9th': ninthlist})
+        tournies[row[0]] = {'id': row[0], 'date': row[1], 'name': row[2], 'link': row[3], 'entrants': row[4], 'tier': row[5], '1st': [row[6]], '2nd': [row[7]], '3rd': [row[8]], '4th': [row[9]], '5th': fifthlist, '7th': seventhlist, '9th': ninthlist}
 
 # populate players list
 with open('data/MnS_2021_Tournaments.csv', 'r') as f:
@@ -46,7 +46,7 @@ def sortPlayers(e):
         return 0 # case for no points
 
 # tourney placings for each player
-for tourney in tournies:
+for id,tourney in tournies.items():
     for place in placements:
         for player in players:
             if player['name'] in tourney[place]:
