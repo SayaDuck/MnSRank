@@ -1,6 +1,8 @@
 # MnSRank
 Maiden &amp; Spell community player ranking based on tournament data.
 
+WIP page [here](https://sydk.dev/MnSRank/)
+
 ## Why?
 2021 just ended and this seemed like a cool idea. Elo doesn't work well for various reasons that all apply to MnS (small community, low volume of tourney games, double elimination). Making a ranking that was purely how well someone did in tournaments this year (**not** how "skilled" they are) was the goal.
 
