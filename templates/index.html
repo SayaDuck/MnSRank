@@ -1,3 +1,6 @@
+{% macro increment(dct, key, inc=1)%}
+    {% if dct.update({key: dct[key] + inc}) %} {% endif %}
+{% endmacro %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,7 +30,7 @@
                                 {% endfor %}
                                 </p>
                             </div>
-                            {% if item in playerinfo[player.name].secondary %}
+                            {% if playerinfo[player.name].secondary %}
                             <div class="secondaries">
                                 <p>Secondaries: 
                                     {% for item in playerinfo[player.name].secondary %}
@@ -39,13 +42,36 @@
                         </div>
                     </div>
                     <div class="results">
-                        {% for item in player.placements %}
-                            {% if loop.index <= 4 %}
-                                Tier {{ tourneylist[item.id].tier }}: {{ tourneylist[item.id].name }} - {{ item.place }} <br>
-                            {% endif %}
-                        {% endfor %}
+                        <div class="topplacements">
+                            {% for item in player.placements %}
+                                {% if loop.index <= 4 %}
+                                    Tier {{ tourneylist[item.id].tier }}: {{ tourneylist[item.id].name }} - {{ item.place }} <br>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <div class="firstsecondthird">
+                            {% set counter = {
+                                'first': 0,
+                                'second': 0,
+                                'third': 0,
+                                } %}
+                            {% for item in player.placements %}
+                                {% if item.place == '1st' %}
+                                    {{ increment(counter, 'first') }}
+                                {% endif %}
+                                {% if item.place == '2nd' %}
+                                    {{ increment(counter, 'second') }}
+                                {% endif %}
+                                {% if item.place == '3rd' %}
+                                    {{ increment(counter, 'third') }}
+                                {% endif %}
+                            {% endfor %}
+                            <div class="firstplaces">1st: {{ counter.first }}x</div>
+                            <div class="secondplaces">2nd: {{ counter.second }}x</div>
+                            <div class="thirdplaces">3rd: {{ counter.third }}x</div>
+                        </div>
                     </div>
-                    <p class="blurb">hi</p>
+                    <p class="blurb">{{ playerinfo[player.name].blurb }}</p>
                 </div>
             </div>
         {% endif %}
