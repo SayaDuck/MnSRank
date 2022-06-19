@@ -10,10 +10,22 @@
 <body>
     <h1>{{ title }}</h1>
     <div id="playerlist">
-        woah it's a list <br>
+        woah it's a list
+         <br>
+        asterisks denote not enough placements for a valid ranking
+         <br>
+    {% set rank = namespace(value=0) %}
     {% for player in playerlist %}
         {% if player.points %}
-            <button type="button" class="collapsible">{{ player.name }}</button>
+            <button type="button" class="collapsible">{{ player.name }}
+                {% if player.placements|length < 3 %}
+                    *
+                {%else%}
+                {% set rank.value = rank.value + 1 %}
+                 -  Rank {{ rank.value }}
+                {% endif %}
+                
+            </button>
             <div class="content">
                 <div class="infographic">
                     <div class="playerinfo">
@@ -43,9 +55,10 @@
                     </div>
                     <div class="results">
                         <div class="topplacements">
+                            {% set tiers = namespace(value=['S','A','B','C','Beginner']) %}
                             {% for item in player.placements %}
                                 {% if loop.index <= 4 %}
-                                    Tier {{ tourneylist[item.id].tier }}: {{ tourneylist[item.id].name }} - {{ item.place }} <br>
+                                {{ tiers.value[tourneylist[item.id].tier|int - 1] }} Tier: {{ tourneylist[item.id].name }} - {{ item.place }} <br>
                                 {% endif %}
                             {% endfor %}
                         </div>
